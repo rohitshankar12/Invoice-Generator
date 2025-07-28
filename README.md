@@ -27,5 +27,9 @@ INFO Invoice Generator is a simple and powerful web application that helps you c
 
 ---
 
-## 📂 Project Structure
+📁 info-invoice-generator/
+├── index.html
+├── style.css
+├── script.js
+└── README.md
 

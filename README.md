@@ -1,56 +1,31 @@
-INFO Invoice Generator 🧾
-A simple, modern, and client-side invoice generator built with HTML, Tailwind CSS, and JavaScript. Create and download professional-looking invoices as PDFs directly in your browser. All data processing happens locally, ensuring your information remains private.
+<h1># 📄 INFO Invoice Generator</h1>
 
-✨ Features
-Real-time Preview: See your invoice update instantly as you type.
+INFO Invoice Generator is a simple and powerful web application that helps you create professional invoices in minutes. Enter your company and client details, add items, choose tax and currency — and download your invoice as a clean, ready-to-send PDF.
 
-Dynamic Items: Add or remove line items with a single click.
+---
 
-Company Logo: Easily upload your company logo to brand your invoices.
+## 🚀 Features
 
-Tax & Currency Support: Set custom tax rates and choose from a list of common currencies.
+- 🏢 Add company & client info
+- 📅 Set invoice & due date
+- 🧾 Add unlimited invoice items
+- 💱 Choose currency (₹, $, €, etc.)
+- 🧮 Auto-calculate subtotal, tax & total
+- 🖼 Upload company logo
+- 📤 Export as high-quality PDF
+- 📱 Responsive and modern UI (Tailwind CSS)
 
-PDF Export: Download your final invoice as a high-quality PDF using jsPDF and html2canvas.
+---
 
-Responsive Design: Looks and works great on both desktop and mobile devices.
+## 🛠 Tech Stack
 
-No Backend Needed: Purely client-side, meaning it's fast, secure, and can be hosted anywhere.
+- HTML5  
+- Tailwind CSS  
+- JavaScript (Vanilla)  
+- [jsPDF](https://github.com/parallax/jsPDF)  
+- [html2canvas](https://github.com/niklasvh/html2canvas)
 
-🚀 Live Demo
-Try the Invoice Generator here! (Replace with your actual demo link)
+---
 
-🛠️ Technologies Used
-This project is built using modern web technologies and relies on a few key libraries:
+## 📂 Project Structure
 
-HTML5: For the basic structure and content.
-
-CSS3: For custom styling and animations.
-
-Tailwind CSS: A utility-first CSS framework for rapid UI development.
-
-JavaScript (ES6+): For all interactivity, calculations, and DOM manipulation.
-
-jsPDF: A library to generate PDF files from client-side JavaScript.
-
-html2canvas: A library to capture the invoice preview as an image, which is then placed into the PDF.
-
-⚙️ How to Use
-To get a local copy up and running, follow these simple steps.
-
-Clone the repository:
-
-Bash
-
-git clone https://github.com/your-username/info-invoice-generator.git
-Navigate to the project directory:
-
-Bash
-
-cd info-invoice-generator
-Open index.html in your browser:
-You can do this by simply double-clicking the index.html file in your file explorer.
-
-That's it! You're ready to start creating invoices.
-
-📄 License
-This project is licensed under the MIT License. See the LICENSE file for more details.

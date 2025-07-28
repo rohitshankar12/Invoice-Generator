@@ -1,0 +1,100 @@
+:root {
+  --primary-color: #4f46e5;
+  --primary-color-hover: #4338ca;
+  --danger-color: #dc2626;
+  --danger-color-hover: #b91c1c;
+  --subtle-gray-bg: #f9fafb;
+  --border-color: #d1d5db;
+  --text-light: #6b7280;
+  --text-dark: #1f2937;
+}
+body {
+  font-family: "Inter", sans-serif;
+  background-color: var(--subtle-gray-bg);
+  color: var(--text-dark);
+}
+header h1 {
+  color: var(--primary-color);
+}
+.bg-white {
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1),
+    0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+input[type="text"],
+input[type="number"],
+input[type="date"],
+textarea,
+select {
+  border-color: var(--border-color);
+  transition: all 0.2s ease-in-out;
+}
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--primary-color) !important;
+  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2) !important;
+  outline: none !important;
+}
+label {
+  color: var(--text-light);
+  font-weight: 500;
+}
+button {
+  transition: all 0.2s ease-in-out;
+}
+#addItemBtn {
+  background-color: var(--primary-color);
+}
+#addItemBtn:hover {
+  background-color: var(--primary-color-hover);
+}
+#downloadPdfBtn {
+  background-color: #16a34a;
+  font-weight: 600;
+}
+#downloadPdfBtn:hover {
+  background-color: #15803d;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(22, 163, 74, 0.2);
+}
+#downloadPdfBtn:active {
+  transform: translateY(0);
+}
+.remove-item-btn {
+  color: var(--text-light);
+}
+.remove-item-btn:hover {
+  color: var(--danger-color);
+  transform: scale(1.1);
+}
+#invoice-preview {
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1),
+    0 4px 6px -4px rgb(0 0 0 / 0.1);
+  border: 1px solid #e5e7eb;
+}
+#invoice-preview h2.uppercase {
+  color: var(--text-light);
+  letter-spacing: 0.1em;
+  font-weight: 600;
+}
+#preview-logo {
+  max-width: 180px;
+  max-height: 70px;
+  object-fit: contain;
+}
+#invoice-preview thead {
+  background-color: var(--subtle-gray-bg);
+  border-bottom: 2px solid #e5e7eb;
+}
+#invoice-preview thead th {
+  color: var(--text-light);
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+#preview-items-table tr {
+  border-bottom: 1px solid #e5e7eb;
+}
+#preview-items-table tr:last-child {
+  border-bottom: none;
+}

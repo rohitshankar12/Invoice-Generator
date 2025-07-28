@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>INFO Invoice Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container mx-auto p-4 lg:p-8">
+      <header class="text-center mb-8">
+        <h1 class="text-4xl font-bold"> INFO Invoice Generator</h1>
+        <p class="text-gray-600 mt-2"></p>
+      </header>
+
+      <main class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div class="bg-white p-6 rounded-xl">
+          <h2 class="text-2xl font-semibold mb-6 border-b pb-3">
+            Invoice Details
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div>
+              <h3 class="font-semibold text-gray-700 mb-2">Your Company</h3>
+              <input
+                type="text"
+                id="companyName"
+                placeholder="Your Company Name"
+                class="w-full p-2 border rounded-md bg-gray-50"
+              />
+              <textarea
+                id="companyDetails"
+                placeholder="Your Address, Email, Phone"
+                class="w-full p-2 border rounded-md mt-2 bg-gray-50"
+                rows="3"
+              ></textarea>
+              <label for="logoUpload" class="block text-sm mt-2"
+                >Company Logo</label
+              >
+              <input
+                type="file"
+                id="logoUpload"
+                accept="image/*"
+                class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100 mt-1"
+              />
+            </div>
+            <div>
+              <h3 class="font-semibold text-gray-700 mb-2">Client Details</h3>
+              <input
+                type="text"
+                id="clientName"
+                placeholder="Client's Company Name"
+                class="w-full p-2 border rounded-md bg-gray-50"
+              />
+              <textarea
+                id="clientDetails"
+                placeholder="Client's Address, Email, Phone"
+                class="w-full p-2 border rounded-md mt-2 bg-gray-50"
+                rows="3"
+              ></textarea>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+            <div>
+              <label for="invoiceNumber" class="block text-sm">Invoice #</label>
+              <input
+                type="text"
+                id="invoiceNumber"
+                placeholder="INV-001"
+                class="w-full p-2 border rounded-md mt-1 bg-gray-50"
+              />
+            </div>
+            <div>
+              <label for="invoiceDate" class="block text-sm">Date</label>
+              <input
+                type="date"
+                id="invoiceDate"
+                class="w-full p-2 border rounded-md mt-1 bg-gray-50"
+              />
+            </div>
+            <div>
+              <label for="dueDate" class="block text-sm">Due Date</label>
+              <input
+                type="date"
+                id="dueDate"
+                class="w-full p-2 border rounded-md mt-1 bg-gray-50"
+              />
+            </div>
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold mb-3">Items</h3>
+            <div id="items-container" class="space-y-3"></div>
+            <button
+              id="addItemBtn"
+              class="mt-4 text-white py-2 px-4 rounded-md"
+            >
+              Add Item
+            </button>
+          </div>
+          <div class="mt-6 border-t pt-4 flex justify-between items-start">
+            <div>
+              <label for="currency" class="block text-sm">Currency</label>
+              <select
+                id="currency"
+                class="mt-1 p-2 border rounded-md bg-gray-50"
+              >
+                <option value="$">USD ($)</option>
+                <option value="€">EUR (€)</option>
+                <option value="£">GBP (£)</option>
+                <option value="₹" selected>INR (₹)</option>
+                <option value="¥">JPY (¥)</option>
+                <option value="C$">CAD (C$)</option>
+                <option value="A$">AUD (A$)</option>
+              </select>
+            </div>
+            <div class="text-right">
+              <label for="taxRate" class="block text-sm">Tax Rate (%)</label>
+              <input
+                type="number"
+                id="taxRate"
+                value="10"
+                class="w-24 p-2 border rounded-md bg-gray-50 mt-1"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl">
+          <div id="invoice-preview" class="p-8 rounded-lg bg-white">
+            <div class="flex justify-between items-start mb-10">
+              <div class="flex items-center gap-4">
+                <img id="preview-logo" class="hidden" alt="Company Logo" />
+                <div>
+                  <h1 id="preview-companyName" class="text-2xl font-bold">
+                    Your Company Name
+                  </h1>
+                  <p
+                    id="preview-companyDetails"
+                    class="text-gray-600 whitespace-pre-wrap"
+                  >
+                    Your Details...
+                  </p>
+                </div>
+              </div>
+              <h2 class="text-3xl font-bold uppercase">Invoice</h2>
+            </div>
+            <div class="grid grid-cols-2 gap-4 mb-10">
+              <div>
+                <h3 class="font-semibold text-gray-700 mb-2">Bill To:</h3>
+                <p id="preview-clientName" class="font-semibold">
+                  Client's Company
+                </p>
+                <p
+                  id="preview-clientDetails"
+                  class="text-gray-600 whitespace-pre-wrap"
+                >
+                  Client's Details...
+                </p>
+              </div>
+              <div class="text-right">
+                <p>
+                  <strong>Invoice #:</strong>
+                  <span id="preview-invoiceNumber">INV-001</span>
+                </p>
+                <p>
+                  <strong>Date:</strong>
+                  <span id="preview-invoiceDate">28 Jul 2025</span>
+                </p>
+                <p>
+                  <strong>Due Date:</strong>
+                  <span id="preview-dueDate">27 Aug 2025</span>
+                </p>
+              </div>
+            </div>
+            <table class="w-full mb-10">
+              <thead>
+                <tr>
+                  <th class="text-left p-3">Description</th>
+                  <th class="p-3">Qty</th>
+                  <th class="p-3">Rate</th>
+                  <th class="text-right p-3">Amount</th>
+                </tr>
+              </thead>
+              <tbody id="preview-items-table"></tbody>
+              <tfoot class="border-t-2 border-gray-200">
+                <tr>
+                  <td colspan="3" class="text-right p-2 font-semibold">
+                    Subtotal
+                  </td>
+                  <td id="preview-subtotal" class="text-right p-2">₹0.00</td>
+                </tr>
+                <tr>
+                  <td colspan="3" class="text-right p-2 font-semibold">
+                    Tax (<span id="preview-taxRate">10</span>%)
+                  </td>
+                  <td id="preview-tax" class="text-right p-2">₹0.00</td>
+                </tr>
+                <tr class="font-bold text-lg bg-gray-100">
+                  <td colspan="3" class="text-right p-3">Total</td>
+                  <td id="preview-total" class="text-right p-3">₹0.00</td>
+                </tr>
+              </tfoot>
+            </table>
+            <div class="text-center text-gray-500 text-sm">
+              <p></p>
+            </div>
+          </div>
+
+          <div class="text-center mt-6">
+            <button
+              id="downloadPdfBtn"
+              class="text-white py-3 px-8 rounded-md w-full sm:w-auto"
+            >
+              Download PDF
+            </button>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
